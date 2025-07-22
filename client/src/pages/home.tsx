@@ -25,6 +25,42 @@ export default function Home() {
     },
   });
 
+  const { data: vegPopular } = useQuery<Dish[]>({
+    queryKey: ["/api/dishes", "popular", "veg"],
+    queryFn: async () => {
+      const response = await fetch("/api/dishes?popularCategory=veg");
+      if (!response.ok) throw new Error("Failed to fetch dishes");
+      return response.json();
+    },
+  });
+
+  const { data: nonVegPopular } = useQuery<Dish[]>({
+    queryKey: ["/api/dishes", "popular", "non-veg"],
+    queryFn: async () => {
+      const response = await fetch("/api/dishes?popularCategory=non-veg");
+      if (!response.ok) throw new Error("Failed to fetch dishes");
+      return response.json();
+    },
+  });
+
+  const { data: breakfastPopular } = useQuery<Dish[]>({
+    queryKey: ["/api/dishes", "popular", "breakfast"],
+    queryFn: async () => {
+      const response = await fetch("/api/dishes?popularCategory=breakfast");
+      if (!response.ok) throw new Error("Failed to fetch dishes");
+      return response.json();
+    },
+  });
+
+  const { data: southIndianPopular } = useQuery<Dish[]>({
+    queryKey: ["/api/dishes", "popular", "south-indian"],
+    queryFn: async () => {
+      const response = await fetch("/api/dishes?popularCategory=south-indian");
+      if (!response.ok) throw new Error("Failed to fetch dishes");
+      return response.json();
+    },
+  });
+
   const { data: searchResults } = useQuery<Dish[]>({
     queryKey: ["/api/dishes", "search", searchQuery],
     queryFn: async () => {
@@ -63,36 +99,107 @@ export default function Home() {
       </header>
 
       {/* Popular Dishes Section */}
-      <section className="px-4 py-6">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          {searchQuery.trim() ? `Search results for "${searchQuery}"` : "Popular dishes of all time"}
-        </h3>
-        
-        {isLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
-                <div className="w-full h-32 bg-gray-200"></div>
-                <div className="p-3">
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-3 w-1/2"></div>
-                  <div className="h-8 bg-gray-200 rounded"></div>
-                </div>
+      {searchQuery.trim() ? (
+        <section className="px-4 py-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            Search results for "{searchQuery}"
+          </h3>
+          
+          {displayDishes?.length ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {displayDishes.map((dish) => (
+                <DishCard key={dish.id} dish={dish} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 text-gray-500">
+              No dishes found matching your search.
+            </div>
+          )}
+        </section>
+      ) : (
+        <div className="px-4 py-6 space-y-8">
+          {/* Popular Dishes of All Time */}
+          <section>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Popular dishes of all time
+            </h3>
+            
+            {isLoading ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+                    <div className="w-full h-32 bg-gray-200"></div>
+                    <div className="p-3">
+                      <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded mb-3 w-1/2"></div>
+                      <div className="h-8 bg-gray-200 rounded"></div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        ) : displayDishes?.length ? (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {displayDishes.map((dish) => (
-              <DishCard key={dish.id} dish={dish} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-8 text-gray-500">
-            {searchQuery.trim() ? "No dishes found matching your search." : "No popular dishes available."}
-          </div>
-        )}
-      </section>
+            ) : popularDishes?.length ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {popularDishes.map((dish) => (
+                  <DishCard key={dish.id} dish={dish} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                No popular dishes available.
+              </div>
+            )}
+          </section>
+
+          {/* Popular in Veg */}
+          {vegPopular && vegPopular.length > 0 && (
+            <section>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4">Popular in Veg</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {vegPopular.map((dish) => (
+                  <DishCard key={dish.id} dish={dish} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Popular in Non-Veg */}
+          {nonVegPopular && nonVegPopular.length > 0 && (
+            <section>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4">Popular in Non-Veg</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {nonVegPopular.map((dish) => (
+                  <DishCard key={dish.id} dish={dish} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Popular in Breakfast */}
+          {breakfastPopular && breakfastPopular.length > 0 && (
+            <section>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4">Popular in Breakfast</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {breakfastPopular.map((dish) => (
+                  <DishCard key={dish.id} dish={dish} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Popular in South Indian */}
+          {southIndianPopular && southIndianPopular.length > 0 && (
+            <section>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4">Popular in South Indian</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {southIndianPopular.map((dish) => (
+                  <DishCard key={dish.id} dish={dish} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      )}
     </div>
   );
 }

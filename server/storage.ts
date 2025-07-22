@@ -68,7 +68,7 @@ export class MemStorage implements IStorage {
 
     // Initialize dishes
     const dishesData = [
-      // Popular dishes
+      // Popular dishes of all time
       { name: "Coffee", price: "15.00", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: true, popularCategory: null },
       { name: "Masala Tea", price: "12.00", image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: true, popularCategory: null },
       { name: "Vada Pav", price: "25.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: true, popularCategory: "veg" },
@@ -76,26 +76,58 @@ export class MemStorage implements IStorage {
       
       // Popular by category
       { name: "Chicken Roll", price: "65.00", image: "https://images.unsplash.com/photo-1619096252214-ef06c45683e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: false, isPopular: false, popularCategory: "non-veg" },
-      { name: "Poha", price: "30.00", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "breakfast" },
-      { name: "Idli (2pc)", price: "35.00", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: "south-indian" },
+      { name: "Egg Roll", price: "55.00", image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: false, isPopular: false, popularCategory: "non-veg" },
+      { name: "Chicken Biryani", price: "85.00", image: "https://images.unsplash.com/photo-1563379091339-03246963d999?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: false, isPopular: false, popularCategory: "non-veg" },
       
-      // More dishes for categories
-      { name: "Dosa", price: "45.00", image: "https://images.unsplash.com/photo-1694844618152-c11b3d83b1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: null },
-      { name: "Uttapam", price: "40.00", image: "https://images.unsplash.com/photo-1630383249896-424e482df921?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Poha", price: "30.00", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "breakfast" },
+      { name: "Upma", price: "25.00", image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "breakfast" },
+      { name: "Paratha with Curd", price: "40.00", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "breakfast" },
+      { name: "Bread Omelet", price: "35.00", image: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: false, isPopular: false, popularCategory: "breakfast" },
+      
+      { name: "Idli (2pc)", price: "35.00", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: "south-indian" },
+      { name: "Dosa", price: "45.00", image: "https://images.unsplash.com/photo-1694844618152-c11b3d83b1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: "south-indian" },
+      { name: "Uttapam", price: "40.00", image: "https://images.unsplash.com/photo-1630383249896-424e482df921?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: "south-indian" },
       { name: "Vada (2pc)", price: "30.00", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Sambhar Vada", price: "35.00", image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: "south-indian" },
+      { name: "Rava Dosa", price: "50.00", image: "https://images.unsplash.com/photo-1694844618152-c11b3d83b1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Set Dosa (3pc)", price: "55.00", image: "https://images.unsplash.com/photo-1694844618152-c11b3d83b1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 1, isVeg: true, isPopular: false, popularCategory: null },
       
       { name: "Fried Rice", price: "55.00", image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: true, isPopular: false, popularCategory: null },
-      { name: "Chowmein", price: "50.00", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Vegetable Noodles", price: "50.00", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: true, isPopular: false, popularCategory: null },
       { name: "Manchurian", price: "45.00", image: "https://images.unsplash.com/photo-1626804475297-41608ea09aeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Spring Roll", price: "40.00", image: "https://images.unsplash.com/photo-1544782858-7e86be0a56b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Chicken Fried Rice", price: "75.00", image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: false, isPopular: false, popularCategory: null },
+      { name: "Chicken Noodles", price: "70.00", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 2, isVeg: false, isPopular: false, popularCategory: null },
       
-      { name: "Pav Bhaji", price: "50.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Roti with Dal", price: "45.00", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "veg" },
+      { name: "Rajma Rice", price: "60.00", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "veg" },
+      { name: "Chole Bhature", price: "55.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: "veg" },
+      { name: "Paneer Butter Masala", price: "80.00", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Dal Makhani", price: "70.00", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 3, isVeg: true, isPopular: false, popularCategory: null },
+      
+      { name: "Pav Bhaji", price: "50.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: "veg" },
       { name: "Bhel Puri", price: "35.00", image: "https://images.unsplash.com/photo-1554978991-33ef7f31d658?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Sev Puri", price: "30.00", image: "https://images.unsplash.com/photo-1554978991-33ef7f31d658?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Pani Puri", price: "25.00", image: "https://images.unsplash.com/photo-1554978991-33ef7f31d658?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Dahi Puri", price: "35.00", image: "https://images.unsplash.com/photo-1554978991-33ef7f31d658?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Aloo Tikki", price: "30.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Chole Tikki", price: "40.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Misal Pav", price: "45.00", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 4, isVeg: true, isPopular: false, popularCategory: null },
       
       { name: "Fresh Lime Water", price: "20.00", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
-      { name: "Lassi", price: "25.00", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Sweet Lassi", price: "25.00", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Salt Lassi", price: "25.00", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Mango Lassi", price: "35.00", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Fresh Juice (Seasonal)", price: "30.00", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Buttermilk", price: "20.00", image: "https://images.unsplash.com/photo-1553909489-cd47e0ef937f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Cold Coffee", price: "30.00", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 5, isVeg: true, isPopular: false, popularCategory: null },
       
       { name: "Gulab Jamun", price: "40.00", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null },
-      { name: "Rasmalai", price: "45.00", image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null }
+      { name: "Rasmalai", price: "45.00", image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Rasgulla", price: "35.00", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Jalebi", price: "30.00", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Ice Cream Cup", price: "25.00", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null },
+      { name: "Kulfi", price: "20.00", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200", categoryId: 6, isVeg: true, isPopular: false, popularCategory: null }
     ];
 
     dishesData.forEach(dish => {
